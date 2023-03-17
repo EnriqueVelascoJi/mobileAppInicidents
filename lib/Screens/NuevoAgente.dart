@@ -22,7 +22,7 @@ class _NuevoAgenteState extends State<NuevoAgente> {
   final numeroAgenteController = TextEditingController();
   final passwordController = TextEditingController();
   Estatus opciones;
-  int opSelected = 3;
+  int opSelected;
   bool estado = false;
 
   final DateTime selectedDate = DateTime.now();
@@ -104,8 +104,9 @@ class _NuevoAgenteState extends State<NuevoAgente> {
               TextField(
                 decoration: InputDecoration(labelText: 'Contraseña'),
                 controller: passwordController,
-                keyboardType: TextInputType.number,
                 onSubmitted: (_) => submitData(),
+                keyboardType: TextInputType.visiblePassword,
+                obscureText: true,
                 // onChanged: (val) => amountInput = val,
               ),
               Row(
@@ -168,13 +169,32 @@ class _NuevoAgenteState extends State<NuevoAgente> {
                   ],
                 ),
               ),
-              TextButton(
-                child: Text('Agregar Usuario'),
-                style: ButtonStyle(
-                  foregroundColor:
-                      MaterialStateProperty.all<Color>(Colors.purple),
-                ),
-                onPressed: submitData,
+              Row(
+                children: [
+                  Expanded(
+                    child: TextButton(
+                      child: Text('Cancelar'),
+                      style: ButtonStyle(
+                        foregroundColor:
+                            MaterialStateProperty.all<Color>(Colors.purple),
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ),
+                  //----------------------
+                  Expanded(
+                    child: TextButton(
+                      child: Text('Agregar Agente'),
+                      style: ButtonStyle(
+                        foregroundColor:
+                            MaterialStateProperty.all<Color>(Colors.purple),
+                      ),
+                      onPressed: submitData,
+                    ),
+                  ),
+                ],
               ),
             ],
           ),

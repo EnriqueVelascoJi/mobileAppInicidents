@@ -68,6 +68,8 @@ class Login extends StatelessWidget {
                 filled: true,
                 fillColor: Colors.white,
               ),
+              keyboardType: TextInputType.visiblePassword,
+              obscureText: true,
               controller: contraController,
             ),
           ),

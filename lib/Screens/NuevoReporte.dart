@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:incidentes_viales_colima/Screens/AgregarInvolucrado.dart';
 import 'package:incidentes_viales_colima/Screens/Login.dart';
 import 'package:intl/intl.dart';
 import '../Widgets/ShowDataItemNEWR.dart';
@@ -52,9 +53,9 @@ class NuevoReporte extends StatelessWidget {
     /*final routeArgs =
         ModalRoute.of(context).settings.arguments as Map<String, String>;*/
     final DateTime date = DateTime.now();
-    int opSelected1 = 0;
-    int opSelected2 = 0;
-    int opSelected3 = 0;
+    int opSelected1;
+    int opSelected2;
+    int opSelected3;
     // final categoryId = routeArgs['id'];
     /*final opcionselected = actionstOptions.where(
       (opcion) {
@@ -360,6 +361,76 @@ class NuevoReporte extends StatelessWidget {
           ImageInput(),
           SizedBox(
             height: 10,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.all(0.8),
+                child: Expanded(
+                  child: Container(
+                    padding: EdgeInsets.all(15),
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                        foregroundColor:
+                            MaterialStateProperty.all<Color>(Colors.black),
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                            Color.fromRGBO(217, 217, 217, 1)),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => HomePage()),
+                        );
+                      },
+                      child: Text('Cancelar'),
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.all(0.8),
+                child: Expanded(
+                  child: Container(
+                    padding: EdgeInsets.all(15),
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                        foregroundColor:
+                            MaterialStateProperty.all<Color>(Colors.black),
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                            Color.fromRGBO(217, 217, 217, 1)),
+                      ),
+                      onPressed: () {},
+                      child: Text('Guardar'),
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.all(0.8),
+                child: Expanded(
+                  child: Container(
+                    padding: EdgeInsets.all(15),
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                        foregroundColor:
+                            MaterialStateProperty.all<Color>(Colors.black),
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                            Color.fromRGBO(217, 217, 217, 1)),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => AgregarInvolucrado()),
+                        );
+                      },
+                      child: Text('Continuar'),
+                    ),
+                  ),
+                ),
+              )
+            ],
           ),
         ],
       ),

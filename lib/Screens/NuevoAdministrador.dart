@@ -8,8 +8,8 @@ enum Estatus {
 }
 
 class NuevoAdministrador extends StatefulWidget {
-  final Function addAgente;
-  NuevoAdministrador(this.addAgente);
+  final Function addAdmin;
+  NuevoAdministrador(this.addAdmin);
 
   @override
   State<NuevoAdministrador> createState() => _NuevoAdminState();
@@ -22,7 +22,7 @@ class _NuevoAdminState extends State<NuevoAdministrador> {
   final numeroAgenteController = TextEditingController();
   final passwordController = TextEditingController();
   Estatus opciones;
-  int opSelected = 3;
+  int opSelected;
   bool estado = false;
 
   final DateTime selectedDate = DateTime.now();
@@ -44,7 +44,7 @@ class _NuevoAdminState extends State<NuevoAdministrador> {
       return;
     }
 
-    widget.addAgente(
+    widget.addAdmin(
       enteredName,
       enteredApellidoP,
       enteredApellidoM,
@@ -104,6 +104,8 @@ class _NuevoAdminState extends State<NuevoAdministrador> {
               TextField(
                 decoration: InputDecoration(labelText: 'Contraseña'),
                 controller: passwordController,
+                keyboardType: TextInputType.visiblePassword,
+                obscureText: true,
                 onSubmitted: (_) => submitData(),
                 // onChanged: (val) => amountInput = val,
               ),
@@ -167,13 +169,31 @@ class _NuevoAdminState extends State<NuevoAdministrador> {
                   ],
                 ),
               ),
-              TextButton(
-                child: Text('Agregar Usuario'),
-                style: ButtonStyle(
-                  foregroundColor:
-                      MaterialStateProperty.all<Color>(Colors.purple),
-                ),
-                onPressed: submitData,
+              Row(
+                children: [
+                  Expanded(
+                    child: TextButton(
+                      child: Text('Cancelar'),
+                      style: ButtonStyle(
+                        foregroundColor:
+                            MaterialStateProperty.all<Color>(Colors.purple),
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ),
+                  Expanded(
+                    child: TextButton(
+                      child: Text('Agregar Administrador'),
+                      style: ButtonStyle(
+                        foregroundColor:
+                            MaterialStateProperty.all<Color>(Colors.purple),
+                      ),
+                      onPressed: submitData,
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
