@@ -39,7 +39,15 @@ class _ImageInputState extends State<ImageInput> {
         fit: BoxFit.cover,
         width: double.infinity,
       ));
+      _storedImage = null;
     });
+  }
+
+  Widget buildCarrusel() {
+    setState(() {
+      CarouselImages(_ImagenesTomadas);
+    });
+    return CarouselImages(_ImagenesTomadas);
   }
 
   @override
@@ -95,7 +103,19 @@ class _ImageInputState extends State<ImageInput> {
               ),
               onPressed: addImageCarousel,
             ),
-            CarouselImages(_ImagenesTomadas),
+            Container(
+              margin: EdgeInsets.all(10),
+              width: MediaQuery.of(context).size.width,
+              height: 200,
+              decoration: BoxDecoration(
+                border: Border.all(width: 1, color: Colors.grey),
+              ),
+              alignment: Alignment.center,
+              child: _ImagenesTomadas.isEmpty
+                  ? Text('No se han agregado fotos')
+                  : CarouselImages(_ImagenesTomadas),
+            ),
+
             /* SizedBox(
               height: 200,
               child: SingleChildScrollView(

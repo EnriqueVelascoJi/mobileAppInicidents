@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
+import 'package:flutter_map/flutter_map.dart';
 //import 'package:osm_flutter_hooks/osm_flutter_hooks.dart';
+import '../Helpers/location_helper.dart';
+import '../Screens/Map_Screen.dart';
+import 'package:syncfusion_flutter_maps/maps.dart';
 
 class LocationInput extends StatefulWidget {
   @override
@@ -8,11 +12,35 @@ class LocationInput extends StatefulWidget {
 }
 
 class _LocationInputState extends State<LocationInput> {
-  String _previewImageUrl;
+  FlutterMap _previewImage;
   Future<void> _getCurrentUserLocation() async {
     final locData = await Location().getLocation();
-    print(locData.latitude);
-    print(locData.longitude);
+    final StaticMapImage = LocationHelper.generateLocationPreviewImage(
+        latitud: locData.latitude, longitud: locData.longitude);
+    setState(() {
+      _previewImage = StaticMapImage;
+    });
+  }
+
+  Future<void> _SelectOnMap() async {
+    final locData = await Location().getLocation();
+    final selectedLocation = await Navigator.of(context).push<MapLatLng>(
+      MaterialPageRoute(
+          fullscreenDialog: true,
+          builder: ((context) =>
+              MapScreen(locData.latitude, locData.longitude))),
+    );
+    if (selectedLocation == null) {
+      return;
+    }
+    print(selectedLocation.latitude);
+    print(selectedLocation.longitude);
+    final StaticMapImage = LocationHelper.generateLocationPreviewImage(
+        latitud: selectedLocation.latitude,
+        longitud: selectedLocation.longitude);
+    setState(() {
+      _previewImage = StaticMapImage;
+    });
   }
 
   @override
@@ -20,22 +48,17 @@ class _LocationInputState extends State<LocationInput> {
     return Column(
       children: <Widget>[
         Container(
-          height: 170,
-          width: double.infinity,
-          decoration:
-              BoxDecoration(border: Border.all(width: 1, color: Colors.grey)),
-          alignment: Alignment.center,
-          child: _previewImageUrl == null
-              ? Text(
-                  'Sin ubicación elegida',
-                  textAlign: TextAlign.center,
-                )
-              : Image.network(
-                  _previewImageUrl,
-                  fit: BoxFit.cover,
-                  width: double.infinity,
-                ),
-        ),
+            height: 170,
+            width: double.infinity,
+            decoration:
+                BoxDecoration(border: Border.all(width: 1, color: Colors.grey)),
+            alignment: Alignment.center,
+            child: _previewImage == null
+                ? Text(
+                    'Sin ubicación elegida',
+                    textAlign: TextAlign.center,
+                  )
+                : _previewImage),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -51,7 +74,7 @@ class _LocationInputState extends State<LocationInput> {
                 Icons.map,
               ),
               label: Text('Elegir en mapa'),
-              onPressed: () {},
+              onPressed: _SelectOnMap,
             ),
           ],
         ),

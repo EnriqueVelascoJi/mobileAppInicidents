@@ -6,10 +6,11 @@ class CodigoVer extends StatelessWidget {
   static const routeName = '/CodigoVer';
   final cController = TextEditingController();
   final oController = TextEditingController();
-  final dAController = TextEditingController();
+  final dController = TextEditingController();
   final iController = TextEditingController();
   final gController = TextEditingController();
   final ooController = TextEditingController();
+  bool get wantKeepAlive => true;
   @override
   Widget build(BuildContext context) {
     final appBar = AppBar(
@@ -74,7 +75,7 @@ class CodigoVer extends StatelessWidget {
                       fillColor: Colors.white,
                     ),
                     keyboardType: TextInputType.number,
-                    controller: cController,
+                    controller: oController,
                   ),
                 ),
                 Flexible(
@@ -86,7 +87,7 @@ class CodigoVer extends StatelessWidget {
                       fillColor: Colors.white,
                     ),
                     keyboardType: TextInputType.number,
-                    controller: cController,
+                    controller: dController,
                   ),
                 ),
                 Flexible(
@@ -98,7 +99,7 @@ class CodigoVer extends StatelessWidget {
                       fillColor: Colors.white,
                     ),
                     keyboardType: TextInputType.number,
-                    controller: cController,
+                    controller: iController,
                   ),
                 ),
                 Flexible(
@@ -110,7 +111,7 @@ class CodigoVer extends StatelessWidget {
                       fillColor: Colors.white,
                     ),
                     keyboardType: TextInputType.number,
-                    controller: cController,
+                    controller: gController,
                   ),
                 ),
                 Flexible(
@@ -122,7 +123,7 @@ class CodigoVer extends StatelessWidget {
                       fillColor: Colors.white,
                     ),
                     keyboardType: TextInputType.number,
-                    controller: cController,
+                    controller: ooController,
                   ),
                 ),
               ],

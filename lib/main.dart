@@ -6,6 +6,7 @@ import 'Screens/RecPassword.dart';
 import 'Screens/CodigoVer.dart';
 import 'Screens/AgregarAgente.dart';
 import 'Screens/AgregarAdmin.dart';
+import 'Screens/AgregarInvolucrado.dart';
 
 void main() {
   /* SystemChrome.setPreferredOrientations([
@@ -40,6 +41,7 @@ class MyApp extends StatelessWidget {
         //VerTodosLosReportes.routeName: (ctx) => VerTodosLosReportes(),
         AgregarAgente.routeName: (ctx) => AgregarAgente(),
         AgregarAdmin.routeName: (ctx) => AgregarAdmin(),
+        AgregarInvolucrado.routeName: (ctx) => AgregarInvolucrado(),
         //VerUsurarios.routeName: (ctx) => VerUsurios(),
       },
     );

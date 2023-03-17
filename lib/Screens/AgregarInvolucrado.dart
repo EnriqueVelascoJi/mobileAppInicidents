@@ -1,72 +1,59 @@
 import 'package:flutter/material.dart';
-import 'NuevoAgente.dart';
-import '../Widgets/ListaAgentes.dart';
-import '../Agente.dart';
+import 'package:incidentes_viales_colima/models/Involucrado.dart';
+import '../Widgets/NuevosInvolucrados.dart';
 import 'Login.dart';
 import 'HomePage.dart';
+import '../Widgets/ListaInvolucrado.dart';
 
-class AgregarAgente extends StatefulWidget {
-  static const routeName = '/AgregarAgente';
-  bool get wantKeepAlive => true;
+class AgregarInvolucrado extends StatefulWidget {
+  static const routeName = '/AgregarInvolucrado';
   @override
-  State<AgregarAgente> createState() => _AgregarAgenteState();
+  State<AgregarInvolucrado> createState() => _AgregarInvolucradoState();
 }
 
-class _AgregarAgenteState extends State<AgregarAgente> {
-  final List<Agente> _userAgentes = [];
-  /*int changeStatus(int estatus) {
-    setState(
-      () {
-         _userAgentes.where((ag){
-          return ag.nombre = estatus;
-         });
-        );
-      },
-    );
-  }*/
-
-  void _addNewAgente(
-      String agNombre,
-      String agApellidoP,
-      String agApellidoM,
-      String agNumeroAgente,
-      String agPassword,
-      int agEstatus,
-      DateTime chosenDate) {
-    final newAgente = Agente(
-      nombre: agNombre,
-      apellidoP: agApellidoP,
-      apellidoM: agApellidoM,
-      numAgente: agNumeroAgente,
-      password: agPassword,
-      estatus: agEstatus,
-      date: chosenDate,
-    );
+class _AgregarInvolucradoState extends State<AgregarInvolucrado> {
+  final List<Involucrado> _userInvolucrado = [];
+  void _addNewInvolucrado(
+      String invNombre,
+      String invApellidoP,
+      String invApellidoM,
+      int invEdad,
+      int invSexo,
+      int invSobriedad,
+      int invCinturon,
+      int invConsecuencias,
+      int invTipoInvolucrado,
+      int invModoTransporte) {
+    final newInvolucrado = Involucrado(
+        nombre: invNombre,
+        apellidoP: invApellidoP,
+        apellidoM: invApellidoM,
+        edad: invEdad,
+        sexo: invSexo,
+        sobriedad: invSobriedad,
+        cinturon: invCinturon,
+        consecuencias: invConsecuencias,
+        tipoInvolucrado: invTipoInvolucrado,
+        modoTransporte: invModoTransporte);
 
     setState(() {
-      _userAgentes.add(newAgente);
+      _userInvolucrado.add(newInvolucrado);
     });
   }
 
-  void _startAddNewAgente(BuildContext ctx) {
+  void _startAddNewInvolucrado(BuildContext ctx) {
     showModalBottomSheet(
       isDismissible: false,
       context: ctx,
       builder: (_) {
         return GestureDetector(
           onTap: () {},
-          child: NuevoAgente(_addNewAgente),
+          child: NuevosInvolucrados(_addNewInvolucrado),
           behavior: HitTestBehavior.opaque,
         );
       },
     );
   }
-
-  /*void BloquearAgente(String nombre, int estado) {
-    setState(
-      () {_userAgentes.any((element) => false)},
-    );
-  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -115,14 +102,14 @@ class _AgregarAgenteState extends State<AgregarAgente> {
                         appBar.preferredSize.height -
                         mediaQuery.padding.top) *
                     0.7,
-                child: ListaAgentes(_userAgentes)),
+                child: ListaInvolucrados(_userInvolucrado)),
           ],
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: () => _startAddNewAgente(context),
+        onPressed: () => _startAddNewInvolucrado(context),
       ),
     );
   }

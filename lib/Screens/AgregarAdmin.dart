@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'NuevoAgente.dart';
+import 'package:incidentes_viales_colima/Screens/NuevoAdministrador.dart';
 import '../Widgets/ListaAdministrador.dart';
 import '../Administrador.dart';
 import 'Login.dart';
@@ -24,7 +24,7 @@ class _AgregarAdminState extends State<AgregarAdmin> {
     );
   }*/
 
-  void _addNewAgente(
+  void _addNewAdmin(
       String agNombre,
       String agApellidoP,
       String agApellidoM,
@@ -32,7 +32,7 @@ class _AgregarAdminState extends State<AgregarAdmin> {
       String agPassword,
       int agEstatus,
       DateTime chosenDate) {
-    final newAgente = Administrador(
+    final newAdministrador = Administrador(
       nombre: agNombre,
       apellidoP: agApellidoP,
       apellidoM: agApellidoM,
@@ -43,17 +43,18 @@ class _AgregarAdminState extends State<AgregarAdmin> {
     );
 
     setState(() {
-      _userAdmins.add(newAgente);
+      _userAdmins.add(newAdministrador);
     });
   }
 
   void _startAddNewAgente(BuildContext ctx) {
     showModalBottomSheet(
+      isDismissible: false,
       context: ctx,
       builder: (_) {
         return GestureDetector(
           onTap: () {},
-          child: NuevoAgente(_addNewAgente),
+          child: NuevoAdministrador(_addNewAdmin),
           behavior: HitTestBehavior.opaque,
         );
       },
